@@ -13,6 +13,7 @@ API para la gestión de locales
 - MongoDB
 
 **API URIs**
+
 | URI                      | Método | Descripción                            |
 | ------------------------ |:------:| --------------------------------------:|
 | /                        | GET    | Aplicación Cliente                     |
