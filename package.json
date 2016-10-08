@@ -1,0 +1,29 @@
+{
+  "name": "guapp-api",
+  "version": "1.0.0",
+  "description": "API para la app GuApp!",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosreyesdavid/Guapp-API.git"
+  },
+  "author": "David Carlos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosreyesdavid/Guapp-API/issues"
+  },
+  "homepage": "https://github.com/carlosreyesdavid/Guapp-API#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.1.0",
+    "request": "^2.75.0",
+    "supertest": "^2.0.0"
+  }
+}
