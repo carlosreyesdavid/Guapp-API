@@ -1,0 +1,11 @@
+{
+    "test": {
+        "MONGODB_URI": "mongodb://carlosreyesdavid-guapp-api-3873078:27017/guapp-test"
+    },
+    "development": {
+        "MONGODB_URI": "mongodb://carlosreyesdavid-guapp-api-3873078:27017/guapp-dev"
+    },
+    "production": {
+        "MONGODB_URI": ""
+    }
+}

@@ -4,7 +4,8 @@
   "description": "API para la app GuApp!",
   "main": "server.js",
   "scripts": {
-    "test": "mocha ./test/test.js"
+    "test": "mocha ./test/test.js",
+    "test-db": "mocha ./test/test-mongo.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   "homepage": "https://github.com/carlosreyesdavid/Guapp-API#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongoose": "^4.6.3"
   },
   "devDependencies": {
     "expect": "^1.20.2",
