@@ -18,6 +18,8 @@ API para la gestión de locales
 | ------------------------ |:------:| --------------------------------------:|
 | /                        | GET    | Aplicación Cliente                     |
 | /api/v1                  | GET    | API Root                               |
+| /api/v1/locals           | GET    | Listar todos los locales               |
 
 **TRELLO**
+
 [Tablero Trello](https://trello.com/b/M9OcNmRC/guapp)
