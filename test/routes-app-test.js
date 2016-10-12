@@ -71,5 +71,26 @@ describe('Locals', function() {
             });
         });
     });
+    
+    it('should add a local on /locals POST', function(done) {
+        chai.request(server)
+            .post(route)
+            .send({name: "Restaurante El Nuevo",local_type: "Restaurante", created_at: new Date(), updated_at: new Date()})
+            .end(function(err, res){
+                if (err) 
+                    throw err
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                res.body.SUCCESS.should.be.a('object');
+                res.body.should.have.property('name');
+                res.body.should.have.property('local_type');
+                res.body.should.have.property('created_at');
+                res.body.should.have.property('updated_at');
+                res.body.message.should.equal('Creado correctamente!');
+                done();
+            });
+    });
 
 });
