@@ -22,6 +22,7 @@ API para la gestión de locales
 | /api/v1/locals/:id       | GET    | Listar un local por su ID              |
 | /api/v1/locals           | POST   | Insertar un local                      |
 | /api/v1/locals/:id       | PUT    | Modificar un local por su ID           |
+| /api/v1/locals/:id       | DELETE | Borrar un local por su ID              |
 
 **TRELLO**
 
