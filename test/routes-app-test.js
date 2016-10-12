@@ -107,7 +107,7 @@ describe('Locals Routes', function() {
                         res.body.should.be.a('object');
                         res.body.should.have.property('message');
                         res.body.message.should.be.a('string');
-                        res.body.message.should.equal('Creado correctamente!');
+                        res.body.message.should.equal('Modificado correctamente!');
                         done();
                     });
             });

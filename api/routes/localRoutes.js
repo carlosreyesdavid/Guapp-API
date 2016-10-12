@@ -5,5 +5,6 @@ var express = require('express'),
 router.get('/', localController.localList);
 router.get('/:id', localController.getLocal);
 router.post('/', localController.addLocal);
+router.put('/:id', localController.modifyLocal);
 
 module.exports = router;

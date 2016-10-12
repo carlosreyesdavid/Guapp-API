@@ -28,3 +28,18 @@ exports.addLocal = function(req, res) {
         res.status(201).json({"message": 'Creado correctamente!'});
     });
 };
+
+exports.modifyLocal = function(req, res){
+    Local.findById(req.params.id, function(err, local) {
+        if(err) 
+            return res.status(500).json({"message": err.message});
+        local.name = req.body.name;
+        local.local_type = req.body.local_type;
+        local.updated_at = new Date()
+        local.save(function(err) {
+            if(err) 
+                return res.status(500).json({"message": err.message});
+            res.status(200).json({"message": 'Modificado correctamente!'});
+        });
+    });
+}
