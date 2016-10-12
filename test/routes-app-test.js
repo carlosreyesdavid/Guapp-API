@@ -120,7 +120,7 @@ describe('Locals Routes', function() {
                 if (err) 
                     throw err
                 chai.request(server)
-                    .delete(route+res.body[0]._id)
+                    .delete(route+'/'+res.body[0]._id)
                     .end(function(err, res){
                         if (err) 
                             throw err

@@ -43,3 +43,15 @@ exports.modifyLocal = function(req, res){
         });
     });
 }
+
+exports.deleteLocal = function(req, res) {
+    Local.findById(req.params.id, function(err, local) {
+        if(err) 
+            return res.status(500).json({"message": err.message});
+        local.remove(function(err){
+            if(err) 
+                return res.status(500).json({"message": err.message});
+            res.status(200).json({"message": 'Borrado correctamente!'});
+        });
+    });
+}
