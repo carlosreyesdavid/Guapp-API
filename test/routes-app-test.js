@@ -9,7 +9,7 @@ var chai     = require('chai'),
 chai.use(chaiHttp);
 process.env.NODE_ENV = 'test';
 
-describe('Locals', function() {
+describe('Locals Routes', function() {
 
     Local.collection.drop();
     
@@ -21,11 +21,13 @@ describe('Locals', function() {
             done();
         });
     });
+    
+    
     afterEach(function(done){
         Local.collection.drop();
         done();
     });
-
+    
     it('should list ALL Locals on /locals GET', function(done) {
         chai.request(server)
             .get(route)
@@ -45,7 +47,6 @@ describe('Locals', function() {
             done();
         });
     });
-    
     
     it('should list a local on /locals/:id GET', function(done) {
         var newLocal =new Local({name: "Guachinche El Test",local_type: "Guachinche", created_at: new Date(), updated_at: new Date()});
@@ -83,14 +84,10 @@ describe('Locals', function() {
                 res.should.be.json;
                 res.body.should.be.a('object');
                 res.body.should.have.property('message');
-                res.body.SUCCESS.should.be.a('object');
-                res.body.should.have.property('name');
-                res.body.should.have.property('local_type');
-                res.body.should.have.property('created_at');
-                res.body.should.have.property('updated_at');
+                res.body.message.should.be.a('string');
                 res.body.message.should.equal('Creado correctamente!');
                 done();
-            });
+        });
     });
 
 });

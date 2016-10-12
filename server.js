@@ -3,7 +3,8 @@ var express    = require('express'),
     mongoose   = require('mongoose'),
     config     = require('./api/config/config.json')[process.env.NODE_ENV || 'development'],
     bodyParser = require('body-parser'),
-    apiRoutes  = require('./api/routes/apiRoutes');
+    apiRoutes  = require('./api/routes/apiRoutes'),
+    bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.MONGODB_URI, function(err) {
@@ -16,6 +17,9 @@ mongoose.connect(config.MONGODB_URI, function(err) {
         }
     }
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/v1/', apiRoutes);
 
