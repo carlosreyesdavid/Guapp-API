@@ -112,5 +112,27 @@ describe('Locals Routes', function() {
                     });
             });
     });
+    
+    it('should delete a local on /locals/:id DELETE', function(done) {
+        chai.request(server)
+            .get(route)
+            .end(function(err, res){
+                if (err) 
+                    throw err
+                chai.request(server)
+                    .delete(route+res.body[0]._id)
+                    .end(function(err, res){
+                        if (err) 
+                            throw err
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('message');
+                        res.body.message.should.be.a('string');
+                        res.body.message.should.equal('Borrado correctamente!');
+                        done();
+                    });
+            });
+    });
 
 });
