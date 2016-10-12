@@ -89,5 +89,28 @@ describe('Locals Routes', function() {
                 done();
         });
     });
+    
+    it('should update a local on /locals/:id PUT', function(done) {
+        chai.request(server)
+            .get(route)
+            .end(function(err, res){
+                if (err) 
+                    throw err
+                chai.request(server)
+                    .put(route+'/'+res.body[0]._id)
+                    .send({'name': 'Guachinche La Ruta Modificada'})
+                    .end(function(err, res){
+                        if (err) 
+                            throw err
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('message');
+                        res.body.message.should.be.a('string');
+                        res.body.message.should.equal('Creado correctamente!');
+                        done();
+                    });
+            });
+    });
 
 });
