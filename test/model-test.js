@@ -5,7 +5,7 @@ var mongoose = require("mongoose"),
 
 mongoose.connect(config.MONGODB_URI)
 
-describe("Test MongoDB Local", function(){  
+describe("Test Model MongoDB Local", function(){  
   
     var currentLocal = null;  
     beforeEach(function(done){    
@@ -59,4 +59,6 @@ describe("Test MongoDB Local", function(){
             done();    
         });  
     }); 
+        
+
 });

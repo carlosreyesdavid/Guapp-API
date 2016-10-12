@@ -19,20 +19,5 @@ describe("Test App", function() {
                 done();
             });
         });
-    });
-    
-    
-    describe("Local Routes /locals", function() {
-        it("GET /api/v1/locals should be return 200", function(done) {
-            request.get(base_url+'/api/v1/locals', function(error, response, body) {
-                expect(response.statusCode).toBe(200);
-                done();
-            });
-        });
-        
-        it("GET /api/v1/locals should be have Content-Type application/json", function(done) {
-            supertest.get('/api/v1/locals')
-                .expect('Content-Type', 'application/json; charset=utf-8', done);
-        });
-    });
+    })
 });

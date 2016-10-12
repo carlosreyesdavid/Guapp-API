@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./test/test.js",
-    "test-db": "mocha ./test/test-mongo.js",
-    "start-db": "mongod --smallfiles"
+    "model-test": "mocha ./test/model-test.js",
+    "routes-test": "mocha ./test/routes-app-test.js",
+    "db": "mongod --smallfiles"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "expect": "^1.20.2",
     "mocha": "^3.1.0",
     "request": "^2.75.0",

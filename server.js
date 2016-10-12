@@ -5,11 +5,15 @@ var express    = require('express'),
     bodyParser = require('body-parser'),
     apiRoutes  = require('./api/routes/apiRoutes');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.MONGODB_URI, function(err) {
-    if(err) {
-        console.log('LOG:> Error de conexión a MongoDB: ', err);
-    } else {
-        console.log('LOG:> Conectado correctamente a MongoDB');
+    if (process.env.NODE_ENV == 'development')
+    {
+        if(err) {
+            console.log('LOG:> Error de conexión a MongoDB: ', err);
+        } else {
+            console.log('LOG:> Conectado correctamente a MongoDB');
+        }
     }
 });
 
@@ -20,3 +24,5 @@ app.get('/', function (req, res) {
 });
 
 app.listen(process.env.PORT || 8081, process.env.IP);
+
+module.exports = app
