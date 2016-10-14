@@ -25,9 +25,9 @@ API para la gestión de locales
 - MongoDB
 
 **Dependencias para el desarrollo**
--ExpressJS
--Mongoose
--Body-parser
+- ExpressJS
+- Mongoose
+- Body-parser
 
 **Test**
 - Mocha
