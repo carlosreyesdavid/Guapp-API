@@ -6,10 +6,10 @@ var chai     = require('chai'),
     route    = '/api/v1/locals',
     should   = chai.should();
     
-chai.use(chaiHttp);
 process.env.NODE_ENV = 'test';
+chai.use(chaiHttp);
 
-describe('Locals Routes', function() {
+describe('Test Locals Routes', function() {
 
     Local.collection.drop();
     
@@ -134,5 +134,112 @@ describe('Locals Routes', function() {
                     });
             });
     });
+});
 
+describe('Test Local Routes Errors',function() {
+    
+    describe('Routes Error GET',function() {
+        it('/locals/12345 GET should show message of invalid id', function(done) {
+            chai.request(server)
+                .get(route+'/12345')
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('Identificador no valido');
+                    done();                               
+                });
+        });
+        
+        it('/locals/:id GET with valid id should show message if not found data for this id', function(done) {
+            chai.request(server)
+                .get(route+'/507f1f77bcf86cd799439011')
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('No existe un Local con ese identificador');
+                    done();                               
+                });
+        });
+    })
+    
+    describe('Routes Errors PUT',function() {
+        it('/locals/12345 PUT should show message of invalid id', function(done) {
+            chai.request(server)
+                .put(route+'/12345')
+                .send({'name': 'Guachinche La Ruta Modificada'})
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('Identificador no valido');
+                    done();                               
+                });
+        });
+        
+        it('/locals/:id PUT with valid id should show message if not found data for this id', function(done) {
+            chai.request(server)
+                .put(route+'/507f1f77bcf86cd799439011')
+                .send({'name': 'Guachinche La Ruta Modificada'})
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('No existe un Local con ese identificador');
+                    done();                               
+                });
+        });
+    })
+    
+    describe('Routes Errors DELETE',function() {
+        it('/locals/12345 DELETE should show message of invalid id', function(done) {
+            chai.request(server)
+                .delete(route+'/12345')
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('Identificador no valido');
+                    done();                               
+                });
+        });
+        
+        it('/locals/:id DELETE with valid id should show message if not found data for this id', function(done) {
+            chai.request(server)
+                .delete(route+'/507f1f77bcf86cd799439011')
+                .end(function(err, res) {
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.message.should.be.a('string');
+                    res.body.message.should.equal('No existe un Local con ese identificador');
+                    done();                               
+                });
+        });
+    })
+    
 });
