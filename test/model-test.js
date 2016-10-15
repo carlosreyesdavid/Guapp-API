@@ -1,6 +1,6 @@
 var mongoose = require("mongoose"),
-    Local    = require("../api/models/local.js"),
-    config   = require('../api/config/config.json')['test'],
+    Local    = require("../src/models/local.js"),
+    config   = require('../src/config/config.json')['test'],
     expect   = require('expect')
 
 mongoose.connect(config.MONGODB_URI)

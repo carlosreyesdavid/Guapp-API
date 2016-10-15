@@ -2,7 +2,7 @@ var chai     = require('chai'),
     chaiHttp = require('chai-http'),
     mongoose = require("mongoose"),
     server   = require('../server'),
-    Local    = require("../api/models/local"),
+    Local    = require("../src/models/local"),
     route    = '/api/v1/locals',
     should   = chai.should();
     

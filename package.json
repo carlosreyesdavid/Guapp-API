@@ -4,7 +4,7 @@
   "description": "API para la app GuApp!",
   "main": "server.js",
   "scripts": {
-    "test": "mocha ./test/test.js",
+    "test": "mocha -R html-cov --require blanket > test/coverage/coverage.html",
     "model-test": "mocha ./test/model-test.js",
     "routes-test": "mocha ./test/routes-app-test.js",
     "db": "mongod --smallfiles"
@@ -25,11 +25,17 @@
     "mongoose": "^4.6.3"
   },
   "devDependencies": {
+    "blanket": "^1.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "expect": "^1.20.2",
-    "mocha": "^3.1.0",
+    "mocha": "^3.1.2",
     "request": "^2.75.0",
     "supertest": "^2.0.0"
+  },
+  "config": {
+    "blanket": {
+      "data-cover-never": ["node_modules","test"]
+    }
   }
 }

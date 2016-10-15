@@ -1,9 +1,9 @@
 var express    = require('express'),
     app        = express(),
     mongoose   = require('mongoose'),
-    config     = require('./api/config/config.json')[process.env.NODE_ENV || 'development'],
+    config     = require('./src/config/config.json')[process.env.NODE_ENV || 'development'],
     bodyParser = require('body-parser'),
-    apiRoutes  = require('./api/routes/apiRoutes'),
+    apiRoutes  = require('./src/routes/apiRoutes'),
     bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
