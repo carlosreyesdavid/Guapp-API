@@ -4,10 +4,12 @@
   "description": "API para la app GuApp!",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -R html-cov --require blanket > test/coverage/coverage.html",
+    "test": "mocha test/",
     "model-test": "mocha ./test/model-test.js",
     "routes-test": "mocha ./test/routes-app-test.js",
-    "db": "mongod --smallfiles"
+    "db": "mongod --smallfiles",
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "blanket": "mocha -R html-cov --require blanket > test/coverage/coverage.html"
   },
   "repository": {
     "type": "git",
@@ -22,20 +24,26 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "mongoose": "^4.6.3"
+    "mongoose": "^4.6.3",
+    "simple-logger": "^1.0.1",
+    "simple-node-logger": "^0.93.12"
   },
   "devDependencies": {
     "blanket": "^1.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "expect": "^1.20.2",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "request": "^2.75.0",
     "supertest": "^2.0.0"
   },
   "config": {
     "blanket": {
-      "data-cover-never": ["node_modules","test"]
+      "data-cover-never": [
+        "node_modules",
+        "test"
+      ]
     }
   }
 }

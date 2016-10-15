@@ -13,10 +13,10 @@ describe("Test App", function() {
             chai.request(server)
                 .get('/')
                 .end(function(err,res) {
-                if (err) 
-                    throw err
-                res.should.have.status(200);
-                done();
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    done();
             });
         });
     
@@ -24,10 +24,10 @@ describe("Test App", function() {
             chai.request(server)
                 .get(route)
                 .end(function(err,res) {
-                if (err) 
-                    throw err
-                res.should.have.status(200);
-                done();
+                    if (err) 
+                        throw err
+                    res.should.have.status(200);
+                    done();
             });
         });
     })

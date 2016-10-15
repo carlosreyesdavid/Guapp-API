@@ -1,10 +1,20 @@
 var mongoose = require('mongoose'),
-    Local = require('../models/local')
+    Local    = require('../models/local'),
+    logger   = require('simple-node-logger'),
+    opts     = {
+                 logDirectory:'log',
+                 fileNamePattern:'server-<DATE>.log',
+                 dateFormat:'YYYY.MM.DD'
+             },
+    log      = logger.createRollingFileLogger( opts );
 
 exports.localList = function(req, res) {
     Local.find({}, function(err, data) {
         if (err) 
+        {   
+            log.err(err)
             return res.status(500).json({"message": err.message});
+        }
         res.status(200).json(data);
     })
 }
@@ -12,8 +22,11 @@ exports.localList = function(req, res) {
 exports.getLocal = function(req, res) {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         Local.findById(req.params.id, function(err, data) {
-            if(err) 
+            if (err) 
+            {   
+                log.err(err)
                 return res.status(500).json({"message": err.message});
+            }
             if(data == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
             else
@@ -33,8 +46,11 @@ exports.addLocal = function(req, res) {
         created_at: new Date()
     });
     local.save(function(err) {
-        if(err) 
+        if (err) 
+        {   
+            log.err(err)
             return res.status(500).json({"message": err.message});
+        }
         res.status(201).json({"message": 'Creado correctamente!'});
     });
 };
@@ -42,8 +58,11 @@ exports.addLocal = function(req, res) {
 exports.modifyLocal = function(req, res){
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         Local.findById(req.params.id, function(err, local) {
-            if(err) 
+            if (err) 
+            {   
+                log.err(err)
                 return res.status(500).json({"message": err.message});
+            }
             if(local == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
             else
@@ -52,8 +71,11 @@ exports.modifyLocal = function(req, res){
                 local.local_type = req.body.local_type;
                 local.updated_at = new Date()
                 local.save(function(err) {
-                    if(err) 
+                    if (err) 
+                    {   
+                        log.err(err)
                         return res.status(500).json({"message": err.message});
+                    }
                     res.status(200).json({"message": 'Modificado correctamente!'});
                 });
             }
@@ -68,8 +90,11 @@ exports.modifyLocal = function(req, res){
 exports.deleteLocal = function(req, res) {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         Local.findById(req.params.id, function(err, local) {
-            if(err) 
+            if (err) 
+            {   
+                log.err(err)
                 return res.status(500).json({"message": err.message});
+            }
             if(local == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
             else 

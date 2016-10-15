@@ -4,16 +4,23 @@ var express    = require('express'),
     config     = require('./src/config/config.json')[process.env.NODE_ENV || 'development'],
     bodyParser = require('body-parser'),
     apiRoutes  = require('./src/routes/apiRoutes'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    logger     = require('simple-node-logger'),
+    opts       = {
+                   logDirectory:'log',
+                   fileNamePattern:'server-<DATE>.log',
+                   dateFormat:'YYYY.MM.DD'
+               },
+    log        = logger.createRollingFileLogger( opts );
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.MONGODB_URI, function(err) {
     if (process.env.NODE_ENV == 'development')
     {
         if(err) {
-            console.log('LOG:> Error de conexión a MongoDB: ', err);
+            log.err('Error de conexión a MongoDB: ', err);
         } else {
-            console.log('LOG:> Conectado correctamente a MongoDB');
+            log.info('Conectado correctamente a MongoDB');
         }
     }
 });
