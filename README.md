@@ -4,6 +4,28 @@
 
 API para la gestión de locales
 
+## Modelo de datos
+
+Local {
+    name: String, required, unique
+    local_type: String
+    address: String
+    phone: String
+    web: String
+    descripcion: String
+    schedules: [Schedule]
+}
+
+Schedule {
+    day: String
+    hours: Hour
+}
+
+Hour {
+    schedule_start: String
+    schedule_end: String 
+}
+
 ##API
 
 | URI                      | Método | Descripción                            |
