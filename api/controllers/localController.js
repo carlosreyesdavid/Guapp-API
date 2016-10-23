@@ -26,10 +26,15 @@ exports.getLocal = function(req, res) {
     }
 };
 
-exports.addLocal = function(req, res) { 
+exports.addLocal = function(req, res) {
     var local = new Local({
         name: req.body.name,
         local_type: req.body.local_type,
+        address: req.body.address,
+        phone: req.body.phone,
+        web: req.body.web,
+        descripcion: req.body.descripcion,
+        schedules: req.body.schedules,
         created_at: new Date()
     });
     local.save(function(err) {
@@ -50,6 +55,11 @@ exports.modifyLocal = function(req, res){
             {
                 local.name = req.body.name;
                 local.local_type = req.body.local_type;
+                local.address = req.body.address;
+                local.phone = req.body.phone;
+                local.web = req.body.web;
+                local.descripcion = req.body.descripcion;
+                local.schedules =  req.body.schedules,
                 local.updated_at = new Date()
                 local.save(function(err) {
                     if(err) 
