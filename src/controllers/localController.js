@@ -1,19 +1,12 @@
 var mongoose = require('mongoose'),
-    Local    = require('../models/local'),
-    logger   = require('simple-node-logger'),
-    opts     = {
-                 logDirectory:'log',
-                 fileNamePattern:'server-<DATE>.log',
-                 dateFormat:'YYYY.MM.DD'
-             },
-    log      = logger.createRollingFileLogger( opts );
+    Local    = require('../models/local')
 
+    
 exports.localList = function(req, res) {
-    Local.find({}, function(err, data) {
-        if (err) 
+    Local.find({}, function(error, data) {
+        if (error) 
         {   
-            log.err(err)
-            return res.status(500).json({"message": err.message});
+            return res.status(500).json({"message": error.message});
         }
         res.status(200).json(data);
     })
@@ -21,11 +14,10 @@ exports.localList = function(req, res) {
 
 exports.getLocal = function(req, res) {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Local.findById(req.params.id, function(err, data) {
-            if (err) 
+        Local.findById(req.params.id, function(error, data) {
+            if (error) 
             {   
-                log.err(err)
-                return res.status(500).json({"message": err.message});
+                return res.status(500).json({"message": error.message});
             }
             if(data == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
@@ -45,11 +37,10 @@ exports.addLocal = function(req, res) {
         local_type: req.body.local_type,
         created_at: new Date()
     });
-    local.save(function(err) {
-        if (err) 
+    local.save(function(error) {
+        if (error) 
         {   
-            log.err(err)
-            return res.status(500).json({"message": err.message});
+            return res.status(500).json({"message": error.message});
         }
         res.status(201).json({"message": 'Creado correctamente!'});
     });
@@ -57,11 +48,10 @@ exports.addLocal = function(req, res) {
 
 exports.modifyLocal = function(req, res){
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Local.findById(req.params.id, function(err, local) {
-            if (err) 
+        Local.findById(req.params.id, function(error, local) {
+            if (error) 
             {   
-                log.err(err)
-                return res.status(500).json({"message": err.message});
+                return res.status(500).json({"message": error.message});
             }
             if(local == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
@@ -70,11 +60,10 @@ exports.modifyLocal = function(req, res){
                 local.name = req.body.name;
                 local.local_type = req.body.local_type;
                 local.updated_at = new Date()
-                local.save(function(err) {
-                    if (err) 
+                local.save(function(error) {
+                    if (error) 
                     {   
-                        log.err(err)
-                        return res.status(500).json({"message": err.message});
+                        return res.status(500).json({"message": error.message});
                     }
                     res.status(200).json({"message": 'Modificado correctamente!'});
                 });
@@ -89,19 +78,18 @@ exports.modifyLocal = function(req, res){
 
 exports.deleteLocal = function(req, res) {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Local.findById(req.params.id, function(err, local) {
-            if (err) 
+        Local.findById(req.params.id, function(error, local) {
+            if (error) 
             {   
-                log.err(err)
-                return res.status(500).json({"message": err.message});
+                return res.status(500).json({"message": error.message});
             }
             if(local == null)
                 res.status(200).json({"message": "No existe un Local con ese identificador"});
             else 
             {
-                local.remove(function(err){
-                    if(err) 
-                        return res.status(500).json({"message": err.message});
+                local.remove(function(error){
+                    if(error) 
+                        return res.status(500).json({"message": error.message});
                     res.status(200).json({"message": 'Borrado correctamente!'});
                 });
             }

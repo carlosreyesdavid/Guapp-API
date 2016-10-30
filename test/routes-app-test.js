@@ -22,7 +22,6 @@ describe('Test Locals Routes', function() {
         });
     });
     
-    
     afterEach(function(done){
         Local.collection.drop();
         done();
@@ -136,7 +135,7 @@ describe('Test Locals Routes', function() {
     });
 });
 
-describe('Test Local Routes Errors',function() {
+describe('Test Local Routes Validations Errors',function() {
     
     describe('Routes Error GET',function() {
         it('/locals/12345 GET should show message of invalid id', function(done) {
@@ -206,6 +205,7 @@ describe('Test Local Routes Errors',function() {
                     done();                               
                 });
         });
+        
     })
     
     describe('Routes Errors DELETE',function() {
