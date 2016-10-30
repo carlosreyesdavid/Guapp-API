@@ -1,5 +1,7 @@
 # API GuApp!
 
+Versión 1.8.0
+
 ## Descripción
 
 API para la gestión de locales
