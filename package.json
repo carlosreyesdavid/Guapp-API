@@ -6,8 +6,9 @@
   "scripts": {
     "test": "mocha test/",
     "model-test": "mocha ./test/model-test.js",
-    "routes-test": "mocha ./test/routes-app-test.js",
+    "locals-test": "mocha ./test/routes-app-test.js",
     "server-test": "mocha ./test/server-error-test.js",
+    "events-test": "mocha ./test/routes-events-test.js",
     "db": "mongod --smallfiles",
     "coverage": "istanbul cover _mocha -- -R spec",
     "blanket": "mocha -R html-cov --require blanket > test/coverage/coverage.html"
