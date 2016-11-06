@@ -37,6 +37,11 @@ API para la gestión de locales
 | /api/v1/locals/:id       | GET    | Listar un local por su ID              |
 | /api/v1/locals/:id       | PUT    | Modificar un local por su ID           |
 | /api/v1/locals/:id       | DELETE | Borrar un local por su ID              |
+| /api/v1/events           | GET    | Listar todos los eventos               |
+| /api/v1/events           | POST   | Insertar un evento                     |
+| /api/v1/events/:id       | GET    | Listar un evento por su ID             |
+| /api/v1/events/:id       | PUT    | Modificar un evento por su ID          |
+| /api/v1/events/:id       | DELETE | Borrar un evento por su ID             |
 
 ## Datos Técnicos
 
@@ -50,6 +55,7 @@ API para la gestión de locales
 - ExpressJS
 - Mongoose
 - Body-parser
+- Winston
 
 **Test**
 - Mocha
@@ -58,6 +64,10 @@ API para la gestión de locales
 - Supertest
 - Expect
 - request
+
+**Cobertura de código**
+- Istanbul
+- BlanketJS
 
 ##Gestión de tareas
 
