@@ -18,10 +18,8 @@ describe('Test Events Routes', function() {
             title: "Ruta de la Tapa",
             place:  "Tegueste",
             description:  "Ruta de la tapa por locales del municipio",
-            startDate: "01/11/2016",
-            endDate: "30/11/2016",
-            created_at: new Date(),
-            updated_at: new Date()
+            startDate: "11/01/2016",
+            endDate: "11/30/2016"
         });
         newEvent.save(function(err) {
             if (err) 
@@ -63,10 +61,8 @@ describe('Test Events Routes', function() {
             title: "Ruta del vino",
             place:  "Tacoronte",
             description:  "Encuentro anual del vino",
-            startDate: "01/12/2016",
-            endDate: "30/12/2016",
-            created_at: new Date(),
-            updated_at: new Date()
+            startDate: "12/01/2016",
+            endDate: "12/30/2016"
         });
         newEvent.save(function(err, data) {
             if (err) 
@@ -101,10 +97,8 @@ describe('Test Events Routes', function() {
                 title: "Noviembre del tapeo",
                 place:  "Santa Cruz de Tenerife",
                 description:  "VI Encuentro gastronomico ciudad de Santa Cruz de Tenerife",
-                startDate: "01/12/2016",
-                endDate: "30/12/2016",
-                created_at: new Date(),
-                updated_at: new Date()
+                startDate: "12/01/2016",
+                endDate: "12/30/2016"
             })
             .end(function(err, res){
                 if (err) 
@@ -130,7 +124,9 @@ describe('Test Events Routes', function() {
                     .put(route+'/'+res.body[0]._id)
                     .send({
                         title: 'IV Ruta del Guachinche',
-                        place: 'Santa Ursula'
+                        place: 'Santa Ursula',
+                        startDate: "11/01/2016",
+                        endDate: "11/30/2016"
                     })
                     .end(function(err, res){
                         if (err) 

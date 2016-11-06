@@ -1,34 +1,39 @@
 var mongoose = require('mongoose'),
-    Event    = require('../models/events')
+    Event    = require('../models/events'),
+    log      = require('../logger/log'),
+    messages = require('../strings/eventStrings.json')
 
-    
 exports.eventList = function(req, res) {
-    Event.find({}, function(error, data) {
-        if (error) 
-        {   
-            return res.status(500).json({"message": error.message});
-        }
-        res.status(200).json(data);
-    })
+    Event.find({})
+        .populate('locals','name')
+        .exec(function(error, data) {
+            if (error) 
+            {   
+                log.error(error.message)
+                return res.status(500).json({"message": error.message});
+            }
+            res.status(200).json(data);
+        })
 }
 
 exports.getEvent = function(req, res) {
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        Event.findById(req.params.id, function(error, data) {
-            if (error) 
-            {   
-                return res.status(500).json({"message": error.message});
-            }
-            if(data == null)
-                res.status(200).json({"message": "No existe un Evento con ese identificador"});
-            else
-                res.status(200).json(data);
-        });
+        Event.findById(req.params.id)
+            .populate('locals','name')
+            .exec(function(error, data) {
+                if (error) 
+                {   
+                    log.error(error.message)
+                    return res.status(500).json({"message": error.message});
+                }
+                if(data == null)
+                    res.status(200).json(messages.NOT_EXIST_ID);
+                else
+                    res.status(200).json(data);
+                })
     } 
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
 };
 
 exports.addEvent = function(req, res) {
@@ -37,15 +42,16 @@ exports.addEvent = function(req, res) {
         description: req.body.description,
         place: req.body.place,
         startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        created_at: new Date()
+        endDate:  req.body.endDate,
+        locals : req.body.locals
     });
     event.save(function(error) {
         if (error) 
         {   
+            log.error(error.message)
             return res.status(500).json({"message": error.message});
         }
-        res.status(201).json({"message": 'Creado correctamente!'});
+        res.status(201).json(messages.CREATED);
     });
 };
 
@@ -54,10 +60,11 @@ exports.modifyEvent = function(req, res){
         Event.findById(req.params.id, function(error, event) {
             if (error) 
             {   
+                log.error(error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(event == null)
-                res.status(200).json({"message": "No existe un Evento con ese identificador"});
+                res.status(200).json(messages.NOT_EXIST_ID);
             else
             {
                 event.title = req.body.title
@@ -69,17 +76,16 @@ exports.modifyEvent = function(req, res){
                 event.save(function(error) {
                     if (error) 
                     {   
+                        log.error(error.message)
                         return res.status(500).json({"message": error.message});
                     }
-                    res.status(200).json({"message": 'Modificado correctamente!'});
+                    res.status(200).json(messages.MODIFIED);
                 });
             }
         });
     }
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
 }
 
 exports.deleteEvent = function(req, res) {
@@ -87,22 +93,23 @@ exports.deleteEvent = function(req, res) {
         Event.findById(req.params.id, function(error, event) {
             if (error) 
             {   
+                log.error(error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(event == null)
-                res.status(200).json({"message": "No existe un Evento con ese identificador"});
+                res.status(200).json(messages.NOT_EXIST_ID);
             else 
             {
                 event.remove(function(error){
-                    if(error) 
-                        return res.status(500).json({"message": error.message});
-                    res.status(200).json({"message": 'Borrado correctamente!'});
+                    if(error) {
+                        log.error(error.message)
+                         return res.status(500).json(error.message);
+                    }
+                    res.status(200).json(messages.DELETED);
                 });
             }
         });
     }
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
 }

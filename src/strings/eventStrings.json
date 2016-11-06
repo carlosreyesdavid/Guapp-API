@@ -1,0 +1,7 @@
+{
+    "NOT_EXIST_ID": { "message": "No existe un Evento con ese identificador"},
+    "ID_NO_VALID":  { "message": "Identificador no valido"},
+    "CREATED":      { "message": "Creado correctamente!"},
+    "MODIFIED":     { "message": "Modificado correctamente!"},
+    "DELETED":      { "message": "Borrado correctamente!"}
+}

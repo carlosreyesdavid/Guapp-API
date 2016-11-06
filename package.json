@@ -28,7 +28,8 @@
     "express": "^4.14.0",
     "mongoose": "^4.6.3",
     "simple-logger": "^1.0.1",
-    "simple-node-logger": "^0.93.12"
+    "simple-node-logger": "^0.93.12",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "blanket": "^1.2.3",
