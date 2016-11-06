@@ -1,11 +1,14 @@
 var mongoose = require('mongoose'),
-    Local    = require('../models/local')
+    Local    = require('../models/local'),
+    log      = require('../logger/log'),
+    messages = require('../strings/localStrings.json')
 
     
 exports.localList = function(req, res) {
     Local.find({}, function(error, data) {
         if (error) 
         {   
+            log.error(error.message)
             return res.status(500).json({"message": error.message});
         }
         res.status(200).json(data);
@@ -17,18 +20,17 @@ exports.getLocal = function(req, res) {
         Local.findById(req.params.id, function(error, data) {
             if (error) 
             {   
+                log.error(error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(data == null)
-                res.status(200).json({"message": "No existe un Local con ese identificador"});
+                res.status(200).json(messages.NOT_EXIST_ID);
             else
                 res.status(200).json(data);
         });
     } 
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
 };
 
 exports.addLocal = function(req, res) {
@@ -45,9 +47,10 @@ exports.addLocal = function(req, res) {
     local.save(function(error) {
         if (error) 
         {   
+            log.error(error.message)
             return res.status(500).json({"message": error.message});
         }
-        res.status(201).json({"message": 'Creado correctamente!'});
+        res.status(201).json(messages.CREATED);
     });
 };
 
@@ -56,10 +59,11 @@ exports.modifyLocal = function(req, res){
         Local.findById(req.params.id, function(error, local) {
             if (error) 
             {   
+                log.error(error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(local == null)
-                res.status(200).json({"message": "No existe un Local con ese identificador"});
+                res.status(200).json(messages.NOT_EXIST_ID);
             else
             {
                 local.name = req.body.name;
@@ -73,17 +77,17 @@ exports.modifyLocal = function(req, res){
                 local.save(function(error) {
                     if (error) 
                     {   
+                        log.error(error.message)
                         return res.status(500).json({"message": error.message});
                     }
-                    res.status(200).json({"message": 'Modificado correctamente!'});
+                    res.status(200).json(messages.MODIFIED);
                 });
             }
         });
     }
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
+
 }
 
 exports.deleteLocal = function(req, res) {
@@ -91,22 +95,24 @@ exports.deleteLocal = function(req, res) {
         Local.findById(req.params.id, function(error, local) {
             if (error) 
             {   
+                log.error(error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(local == null)
-                res.status(200).json({"message": "No existe un Local con ese identificador"});
+                res.status(200).json(messages.NOT_EXIST_ID);
             else 
             {
                 local.remove(function(error){
                     if(error) 
+                    {
+                        log.error(error.message)
                         return res.status(500).json({"message": error.message});
-                    res.status(200).json({"message": 'Borrado correctamente!'});
+                    }
+                    res.status(200).json(messages.DELETED);
                 });
             }
         });
     }
     else
-    {
-        res.status(200).json({"message": "Identificador no valido"});
-    }
+        res.status(200).json(messages.ID_NO_VALID);
 }
