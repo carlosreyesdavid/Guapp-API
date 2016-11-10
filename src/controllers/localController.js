@@ -8,7 +8,7 @@ exports.localList = function(req, res) {
     Local.find({}, function(error, data) {
         if (error) 
         {   
-            log.error(error.message)
+            log.error('(' + error.code +') '+ error.message)
             return res.status(500).json({"message": error.message});
         }
         res.status(200).json(data);
@@ -20,7 +20,7 @@ exports.getLocal = function(req, res) {
         Local.findById(req.params.id, function(error, data) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(data == null)
@@ -47,7 +47,7 @@ exports.addLocal = function(req, res) {
     local.save(function(error) {
         if (error) 
         {   
-            log.error(error.message)
+            log.error('(' + error.code +') '+ error.message)
             return res.status(500).json({"message": error.message});
         }
         res.status(201).json(messages.CREATED);
@@ -59,7 +59,7 @@ exports.modifyLocal = function(req, res){
         Local.findById(req.params.id, function(error, local) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(local == null)
@@ -77,7 +77,7 @@ exports.modifyLocal = function(req, res){
                 local.save(function(error) {
                     if (error) 
                     {   
-                        log.error(error.message)
+                        log.error('(' + error.code +') '+ error.message)
                         return res.status(500).json({"message": error.message});
                     }
                     res.status(200).json(messages.MODIFIED);
@@ -95,7 +95,7 @@ exports.deleteLocal = function(req, res) {
         Local.findById(req.params.id, function(error, local) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(local == null)
@@ -105,7 +105,7 @@ exports.deleteLocal = function(req, res) {
                 local.remove(function(error){
                     if(error) 
                     {
-                        log.error(error.message)
+                        log.error('(' + error.code +') '+ error.message)
                         return res.status(500).json({"message": error.message});
                     }
                     res.status(200).json(messages.DELETED);

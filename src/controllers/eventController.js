@@ -9,7 +9,7 @@ exports.eventList = function(req, res) {
         .exec(function(error, data) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             res.status(200).json(data);
@@ -23,7 +23,7 @@ exports.getEvent = function(req, res) {
             .exec(function(error, data) {
                 if (error) 
                 {   
-                    log.error(error.message)
+                    log.error('(' + error.code +') '+ error.message)
                     return res.status(500).json({"message": error.message});
                 }
                 if(data == null)
@@ -48,7 +48,7 @@ exports.addEvent = function(req, res) {
     event.save(function(error) {
         if (error) 
         {   
-            log.error(error.message)
+            log.error('(' + error.code +') '+ error.message)
             return res.status(500).json({"message": error.message});
         }
         res.status(201).json(messages.CREATED);
@@ -60,7 +60,7 @@ exports.modifyEvent = function(req, res){
         Event.findById(req.params.id, function(error, event) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(event == null)
@@ -76,7 +76,7 @@ exports.modifyEvent = function(req, res){
                 event.save(function(error) {
                     if (error) 
                     {   
-                        log.error(error.message)
+                        log.error('(' + error.code +') '+ error.message)
                         return res.status(500).json({"message": error.message});
                     }
                     res.status(200).json(messages.MODIFIED);
@@ -93,7 +93,7 @@ exports.deleteEvent = function(req, res) {
         Event.findById(req.params.id, function(error, event) {
             if (error) 
             {   
-                log.error(error.message)
+                log.error('(' + error.code +') '+ error.message)
                 return res.status(500).json({"message": error.message});
             }
             if(event == null)
@@ -102,8 +102,8 @@ exports.deleteEvent = function(req, res) {
             {
                 event.remove(function(error){
                     if(error) {
-                        log.error(error.message)
-                         return res.status(500).json(error.message);
+                        log.error('(' + error.code +') '+ error.message)
+                        return res.status(500).json(error.message);
                     }
                     res.status(200).json(messages.DELETED);
                 });
